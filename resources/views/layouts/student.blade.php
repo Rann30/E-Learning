@@ -26,67 +26,83 @@
             height: 100vh;
             width: 250px;
             background: linear-gradient(180deg, #4A5D7E 0%, #3A4D6E 100%);
-            padding-top: 20px;
+            padding-top: 0;
             transition: all 0.3s;
             z-index: 1000;
+            overflow-y: auto;
         }
 
         .sidebar-header {
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 25px 20px;
             font-size: 24px;
             font-weight: bold;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-subtext {
+            font-size: 10px;
+            font-weight: normal;
+            margin-top: 5px;
+            opacity: 0.8;
+            line-height: 1.2;
         }
 
         .sidebar-menu {
             list-style: none;
             padding: 0;
-            margin-top: 20px;
+            margin: 0;
         }
 
         .menu-section {
             color: #9CA3AF;
-            font-size: 12px;
-            padding: 15px 20px 10px;
+            font-size: 11px;
+            padding: 20px 20px 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
+            font-weight: 600;
         }
 
         .sidebar-menu li a {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
+            padding: 14px 20px;
             color: #E5E7EB;
             text-decoration: none;
             transition: all 0.3s;
+            border-left: 3px solid transparent;
         }
 
         .sidebar-menu li a:hover,
         .sidebar-menu li a.active {
             background-color: rgba(255, 255, 255, 0.1);
             border-left: 3px solid #60A5FA;
+            color: #ffffff;
         }
 
         .sidebar-menu li a i {
-            margin-right: 10px;
+            margin-right: 12px;
             font-size: 18px;
+            width: 24px;
+            text-align: center;
         }
 
         .logout-btn {
-            position: absolute;
+            position: sticky;
             bottom: 0;
             width: 100%;
             background-color: #EF4444;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logout-btn:hover {
@@ -147,6 +163,11 @@
             color: #6B7280;
         }
 
+        /* Toggle button untuk mobile */
+        .sidebar-toggle {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -160,6 +181,25 @@
             .main-content {
                 margin-left: 0;
             }
+
+            .sidebar-toggle {
+                display: block;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
+            }
         }
     </style>
 
@@ -167,12 +207,15 @@
 </head>
 
 <body>
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             SMART BM3
-            <div style="font-size: 12px; font-weight: normal; margin-top: 5px;">
-                By BM3 SMK3 THAHUN PALAJARAN
+            <div class="sidebar-subtext">
+                By BM3 SMK3 TAHUN PALAJARAN
             </div>
         </div>
 
@@ -187,30 +230,64 @@
 
             <li class="menu-section">LMS</li>
             <li>
-                <a href="#">
+                <a href="{{ route('student.courses') }}" class="{{ request()->routeIs('student.courses*') ? 'active' : '' }}">
                     <i class="bi bi-book"></i>
                     <span>Smart Learning</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('student.assignments') }}" class="{{ request()->routeIs('student.assignments*') ? 'active' : '' }}">
+                    <i class="bi bi-clipboard-check"></i>
+                    <span>Tugas Saya</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('student.grades') }}" class="{{ request()->routeIs('student.grades') ? 'active' : '' }}">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Nilai</span>
                 </a>
             </li>
 
             <li class="menu-section">KEHADIRAN</li>
             <li>
-                <a href="#">
+                <a href="{{ route('student.attendance') }}" class="{{ request()->routeIs('student.attendance') ? 'active' : '' }}">
                     <i class="bi bi-calendar-check"></i>
                     <span>Data Kehadiran</span>
                 </a>
             </li>
 
+            <li class="menu-section">JADWAL</li>
+            <li>
+                <a href="{{ route('student.schedule') }}" class="{{ request()->routeIs('student.schedule') ? 'active' : '' }}">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Jadwal Kelas</span>
+                </a>
+            </li>
+
             <li class="menu-section">BIMBINGAN</li>
             <li>
-                <a href="#">
+                <a href="{{ route('student.prakerin') }}" class="{{ request()->routeIs('student.prakerin') ? 'active' : '' }}">
                     <i class="bi bi-person-video2"></i>
                     <span>Bimbingan Prakerin</span>
                 </a>
             </li>
+
+            <li class="menu-section">LAINNYA</li>
+            <li>
+                <a href="{{ route('student.announcements') }}" class="{{ request()->routeIs('student.announcements') ? 'active' : '' }}">
+                    <i class="bi bi-megaphone"></i>
+                    <span>Pengumuman</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('student.profile') }}" class="{{ request()->routeIs('student.profile') ? 'active' : '' }}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Profile Saya</span>
+                </a>
+            </li>
         </ul>
 
-        <form action="{{ route('logout') }}" method="POST" style="position: absolute; bottom: 0; width: 100%;">
+        <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button type="submit" class="logout-btn">
                 <i class="bi bi-box-arrow-right"></i>
@@ -223,18 +300,18 @@
     <div class="main-content">
         <!-- Top Bar -->
         <div class="top-bar">
-            <div>
-                <button class="btn btn-link d-md-none" onclick="toggleSidebar()">
-                    <i class="bi bi-list"></i>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn btn-link sidebar-toggle d-md-none" onclick="toggleSidebar()">
+                    <i class="bi bi-list" style="font-size: 24px;"></i>
                 </button>
                 <h4>@yield('page-title', 'DASHBOARD')</h4>
             </div>
 
             <div class="user-info">
-                <button class="btn btn-light">
+                <button class="btn btn-light" onclick="toggleFullscreen()">
                     <i class="bi bi-fullscreen"></i>
                 </button>
-                <button class="btn btn-light">
+                <button class="btn btn-light" onclick="toggleDarkMode()">
                     <i class="bi bi-moon"></i>
                 </button>
                 <img src="{{ Auth::user()->student->photo ?? 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
@@ -271,9 +348,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Toggle Sidebar (Mobile)
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
         }
+
+        // Toggle Fullscreen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Toggle Dark Mode (Simple)
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            // Simpan preferensi ke localStorage
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+        }
+
+        // Load Dark Mode preference
+        window.addEventListener('DOMContentLoaded', () => {
+            const darkMode = localStorage.getItem('darkMode');
+            if (darkMode === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        });
     </script>
 
     @stack('scripts')

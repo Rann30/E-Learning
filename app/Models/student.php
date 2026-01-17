@@ -19,21 +19,28 @@ class Student extends Model
         'badges'
     ];
 
-    // Relasi ke User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relasi ke Enrollment
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
     }
 
-    // Relasi ke Violation Card
     public function violationCards()
     {
         return $this->hasMany(ViolationCard::class);
+    }
+
+    public function assignmentSubmissions()
+    {
+        return $this->hasMany(AssignmentSubmission::class);
+    }
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class);
     }
 }
