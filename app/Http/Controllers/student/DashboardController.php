@@ -192,14 +192,61 @@ class DashboardController extends Controller
         return array_slice($badges, 0, 3);
     }
 
-    // ... method lainnya tetap sama
     public function editProfile()
     {
-        // ... kode tetap sama
+        $student = Auth::user()->student;
+
+        if (!$student) {
+            return redirect()->route('login')
+                ->with('error', 'Data student tidak ditemukan');
+        }
+
+        return view('student.edit-profile', compact('student'));
     }
 
     public function updateProfile(Request $request)
     {
-        // ... kode tetap sama
+        $request->validate([
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ], [
+            'photo.image' => 'File harus berupa gambar',
+            'photo.mimes' => 'Format gambar harus: jpeg, png, jpg, atau gif',
+            'photo.max' => 'Ukuran gambar maksimal 2MB',
+        ]);
+
+        $student = Auth::user()->student;
+
+        if (!$student) {
+            return redirect()->route('login')
+                ->with('error', 'Data student tidak ditemukan');
+        }
+
+        try {
+            if ($request->hasFile('photo')) {
+                // Hapus foto lama jika ada
+                if ($student->photo && file_exists(public_path($student->photo))) {
+                    unlink(public_path($student->photo));
+                }
+
+                // Upload foto baru
+                $file = $request->file('photo');
+                $filename = time() . '_' . $file->getClientOriginalName();
+
+                // Buat folder jika belum ada
+                if (!file_exists(public_path('uploads/students'))) {
+                    mkdir(public_path('uploads/students'), 0755, true);
+                }
+
+                $file->move(public_path('uploads/students'), $filename);
+                $student->photo = 'uploads/students/' . $filename;
+            }
+
+            $student->save();
+
+            return redirect()->route('student.dashboard')
+                ->with('success', 'Profile berhasil diupdate!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 }
