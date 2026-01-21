@@ -196,7 +196,7 @@
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <i class="bi bi-shield-check"></i> ADMIN PANEL
-            <div class="sidebar-subtext">SMART BM3 Management</div>
+            <div class="sidebar-subtext">SIPANDA MANAGEMEN</div>
             <span class="admin-badge">
                 <i class="bi bi-star me-1"></i>Administrator
             </span>

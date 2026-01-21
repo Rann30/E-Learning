@@ -115,25 +115,10 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // ============ VIOLATION CARDS ============
+
 
         ViolationCard::firstOrCreate(
-            ['student_id' => $student1->id],
-            [
-                'card_number' => 'Ganjil 2526',
-                'is_active' => true,
-                'description' => 'Akses sas ganjil 2526 sudah aktif, kamu dapat melihat kartu ini'
-            ]
-        );
-
-        ViolationCard::firstOrCreate(
-            ['student_id' => $student2->id],
-            [
-                'card_number' => 'Ganjil 2527',
-                'is_active' => true,
-                'description' => 'Kartu pelanggaran aktif'
-            ]
-        );
+     
 
         // ============ COURSES ============
 

@@ -213,9 +213,9 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            SMART BM3
+            SIPANDA
             <div class="sidebar-subtext">
-                By BM3 SMK3 TAHUN PALAJARAN
+                BY SDN Bojong 02 tahun pelajaran2026/2027
             </div>
         </div>
 
@@ -232,7 +232,7 @@
             <li>
                 <a href="{{ route('student.courses') }}" class="{{ request()->routeIs('student.courses*') ? 'active' : '' }}">
                     <i class="bi bi-book"></i>
-                    <span>Smart Learning</span>
+                    <span>Ujian</span>
                 </a>
             </li>
             <li>
@@ -256,21 +256,15 @@
                 </a>
             </li>
 
-            <li class="menu-section">JADWAL</li>
+            <!-- <li class="menu-section">JADWAL</li>
             <li>
                 <a href="{{ route('student.schedule') }}" class="{{ request()->routeIs('student.schedule') ? 'active' : '' }}">
                     <i class="bi bi-calendar-event"></i>
                     <span>Jadwal Kelas</span>
                 </a>
-            </li>
+            </li> -->
 
-            <li class="menu-section">BIMBINGAN</li>
-            <li>
-                <a href="{{ route('student.prakerin') }}" class="{{ request()->routeIs('student.prakerin') ? 'active' : '' }}">
-                    <i class="bi bi-person-video2"></i>
-                    <span>Bimbingan Prakerin</span>
-                </a>
-            </li>
+
 
             <li class="menu-section">LAINNYA</li>
             <li>
