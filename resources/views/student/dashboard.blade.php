@@ -15,6 +15,16 @@
         margin-bottom: 30px;
     }
 
+    .profile-date {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        color: white;
+        font-size: 12px;
+        z-index: 1;
+    }
+
+
     .profile-banner::before {
         content: '';
         position: absolute;
@@ -24,7 +34,10 @@
         height: 400px;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
+        pointer-events: none;
+        /* 🔥 INI KUNCINYA */
     }
+
 
     .profile-info {
         display: flex;
@@ -60,6 +73,7 @@
         position: absolute;
         bottom: 40px;
         right: 40px;
+        z-index: 10;
         background: white;
         color: #667eea;
         border: none;
@@ -159,14 +173,15 @@
             @endif
     </div>
 
-    <a href="{{ route('student.edit-profile') }}" class="edit-profile-btn">
-        <i class="bi bi-pencil me-2"></i>Edit Profile
+    <a href="{{ route('student.edit-profile') }}"
+        class="edit-profile-btn">
+        <i class="bi bi-pencil me-2"></i> Edit Profile
     </a>
 
-
-    <div style="position: absolute; bottom: 40px; left: 40px; color: white; font-size: 12px;">
+    <div class="profile-date">
         {{ now()->format('d F Y H:i A') }}
     </div>
+
 </div>
 
 <!-- Statistics Cards -->
