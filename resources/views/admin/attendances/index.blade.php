@@ -18,9 +18,9 @@
                             value="{{ request('date', today()->format('Y-m-d')) }}">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Kursus</label>
+                        <label class="form-label">mata pelajaran</label>
                         <select class="form-select" name="course_id">
-                            <option value="">Semua Kursus</option>
+                            <option value="">Semua mata pelajaran</option>
                             @foreach($courses as $course)
                             <option value="{{ $course->id }}" {{ request('course_id') == $course->id ? 'selected' : '' }}>
                                 {{ $course->name }}
@@ -62,9 +62,9 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Kursus</label>
+                        <label class="form-label">mata pelajaran</label>
                         <select class="form-select" name="course_id" required>
-                            <option value="">Pilih Kursus</option>
+                            <option value="">Pilih mata pelajaran</option>
                             @foreach($courses as $course)
                             <option value="{{ $course->id }}">{{ $course->name }}</option>
                             @endforeach
@@ -110,7 +110,7 @@
                             <th>No</th>
                             <th>Tanggal</th>
                             <th>Siswa</th>
-                            <th>Kursus</th>
+                            <th>mata pelajaran</th>
                             <th>Status</th>
                             <th>Keterangan</th>
                         </tr>

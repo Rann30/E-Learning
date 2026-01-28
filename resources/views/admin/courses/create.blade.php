@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label class="form-label">Nama Kursus</label>
+                            <label class="form-label">Nama Mata Pelajaran</label>
                             <input type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">Kode Kursus</label>
+                            <label class="form-label">Kode Mata Pelajaran</label>
                             <input type="text"
                                 class="form-control @error('code') is-invalid @enderror"
                                 name="code"

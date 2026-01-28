@@ -44,7 +44,7 @@
                         <thead class="table-light">
                             <tr>
                                 <th>Waktu</th>
-                                <th>Kursus</th>
+                                <th>Mata pelajaran</th>
                                 <th>Kode</th>
                                 <th>Ruangan</th>
                                 <th>Aksi</th>

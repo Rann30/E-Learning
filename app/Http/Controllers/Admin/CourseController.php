@@ -43,7 +43,7 @@ class CourseController extends Controller
         ]);
 
         return redirect()->route('admin.courses.index')
-            ->with('success', 'Kursus berhasil dibuat!');
+            ->with('success', 'Mata pelajaran berhasil dibuat!');
     }
 
     public function show(Course $course)
@@ -79,7 +79,7 @@ class CourseController extends Controller
         ]);
 
         return redirect()->route('admin.courses.index')
-            ->with('success', 'Kursus berhasil diupdate!');
+            ->with('success', 'Mata pelajaran berhasil diupdate!');
     }
 
     public function destroy(Course $course)
@@ -97,6 +97,6 @@ class CourseController extends Controller
         ]);
 
         return redirect()->route('admin.courses.index')
-            ->with('success', 'Kursus berhasil dihapus!');
+            ->with('success', 'Mata Pelajaran berhasil dihapus!');
     }
 }

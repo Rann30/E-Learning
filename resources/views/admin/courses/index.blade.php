@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Kursus')
-@section('page-title', 'Kelola Kursus')
+@section('title', 'Kelola mata pelajaran')
+@section('page-title', 'Kelola Mata Pelajaran')
 
 @section('content')
 <div class="container-fluid">
@@ -9,10 +9,10 @@
         <div class="card-header bg-white d-flex justify-content-between align-items-center">
             <h5 class="mb-0">
                 <i class="bi bi-journal-code text-primary me-2"></i>
-                Daftar Kursus ({{ $courses->total() }})
+                Daftar mata pelajaran ({{ $courses->total() }})
             </h5>
             <a href="{{ route('admin.courses.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-circle me-2"></i>Tambah Kursus
+                <i class="bi bi-plus-circle me-2"></i>Tambah Mata Pelajaran
             </a>
         </div>
         <div class="card-body">
@@ -22,7 +22,7 @@
                         <tr>
                             <th>No</th>
                             <th>Kode</th>
-                            <th>Nama Kursus</th>
+                            <th>Nama mata pelajaran</th>
                             <th>Pengajar</th>
                             <th>Siswa</th>
                             <th>Aksi</th>
@@ -51,7 +51,7 @@
                                     <form action="{{ route('admin.courses.destroy', $course->id) }}"
                                         method="POST"
                                         class="d-inline"
-                                        onsubmit="return confirm('Yakin ingin menghapus kursus ini?')">
+                                        onsubmit="return confirm('Yakin ingin menghapus mata pelajaran ini?')">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
@@ -65,7 +65,7 @@
                         <tr>
                             <td colspan="6" class="text-center text-muted py-4">
                                 <i class="bi bi-inbox" style="font-size: 48px;"></i>
-                                <p class="mt-2">Belum ada kursus</p>
+                                <p class="mt-2">Belum ada mata pelajaran</p>
                             </td>
                         </tr>
                         @endforelse

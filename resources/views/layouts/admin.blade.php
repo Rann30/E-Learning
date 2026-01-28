@@ -15,7 +15,6 @@
             background-color: #f5f7fa;
         }
 
-        /* Sidebar */
         .sidebar {
             position: fixed;
             top: 0;
@@ -115,14 +114,12 @@
             background-color: #b91c1c;
         }
 
-        /* Main Content */
         .main-content {
             margin-left: 260px;
             padding: 20px;
             min-height: 100vh;
         }
 
-        /* Top Bar */
         .top-bar {
             background: white;
             padding: 20px 30px;
@@ -154,7 +151,6 @@
             border: 2px solid #3b82f6;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
                 left: -260px;
@@ -189,14 +185,12 @@
 </head>
 
 <body>
-    <!-- Overlay for mobile -->
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <i class="bi bi-shield-check"></i> ADMIN PANEL
-            <div class="sidebar-subtext">SIPANDA MANAGEMEN</div>
+            <div class="sidebar-subtext">SMART BM3 Management</div>
             <span class="admin-badge">
                 <i class="bi bi-star me-1"></i>Administrator
             </span>
@@ -313,9 +307,7 @@
         </form>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
-        <!-- Top Bar -->
         <div class="top-bar">
             <div class="d-flex align-items-center gap-3">
                 <button class="btn btn-link d-md-none" onclick="toggleSidebar()">
@@ -344,7 +336,6 @@
             </div>
         </div>
 
-        <!-- Alert Messages -->
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="bi bi-check-circle me-2"></i>
@@ -361,7 +352,6 @@
         </div>
         @endif
 
-        <!-- Page Content -->
         @yield('content')
     </div>
 

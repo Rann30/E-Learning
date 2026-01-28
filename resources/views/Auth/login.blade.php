@@ -134,9 +134,9 @@
         <div class="login-card">
             <div class="login-header">
                 <div class="logo">
-                    <i class="bi bi-mortarboard-fill"></i>
+                    <i class="bi bi-book-fill"></i>
                 </div>
-                <h2>SMART BM3</h2>
+                <h2>SIPANDA</h2>
                 <p>E-Learning Platform</p>
             </div>
 
@@ -203,7 +203,11 @@
                 </button>
 
                 <div class="register-link">
-                    Belum punya akun? <a href="{{ route('register') }}">Daftar Sekarang</a>
+                    Belum punya akun?
+                    <a href="https://wa.me/62895333567642" target="_blank">
+                        HUBUNGI ADMIN
+                    </a>
+
                 </div>
             </form>
         </div>

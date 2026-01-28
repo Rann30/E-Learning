@@ -19,10 +19,10 @@
                         <tr>
                             <th>No</th>
                             <th>Judul Tugas</th>
-                            <th>Kursus</th>
+                            <th>mata pelajaran</th>
                             <th>Deadline</th>
-                            <th>Submission</th>
-                            <th>Max Score</th>
+                            <th>penyerahan</th>
+                            <th>KKM</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

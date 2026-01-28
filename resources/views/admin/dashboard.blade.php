@@ -90,18 +90,12 @@
                     <i class="bi bi-journal-code"></i>
                 </div>
                 <div class="stat-value text-warning">{{ $totalCourses }}</div>
-                <div class="stat-label">Total Kursus</div>
+                <div class="stat-label">Total mata pelajaran</div>
             </div>
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="border-left-color: #06b6d4;">
-                <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
-                    <i class="bi bi-clipboard-check"></i>
-                </div>
-                <div class="stat-value text-info">{{ $totalEnrollments }}</div>
-                <div class="stat-label">Total Enrollment</div>
-            </div>
+
         </div>
     </div>
 
@@ -186,13 +180,13 @@
             <div class="chart-container mb-4">
                 <h5 class="mb-3">
                     <i class="bi bi-graph-up text-success me-2"></i>
-                    Kursus Terpopuler
+                    mata pelajaran Terpopuler
                 </h5>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
-                                <th>Kursus</th>
+                                <th>mata pelajaran</th>
                                 <th>Kode</th>
                                 <th>Guru</th>
                                 <th>Siswa</th>
@@ -264,9 +258,8 @@
                     <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
                         <i class="bi bi-plus-circle me-2"></i>Tambah User Baru
                     </a>
-                    <a href="{{ route('admin.courses.create') }}" class="btn btn-success">
-                        <i class="bi bi-journal-plus me-2"></i>Buat Kursus Baru
-                    </a>
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-success">
+                        <i class="bi bi-journal-plus me-2"></i> mata pelajaran </a>
                     <a href="{{ route('admin.announcements.create') }}" class="btn btn-info">
                         <i class="bi bi-megaphone me-2"></i>Buat Pengumuman
                     </a>
@@ -280,7 +273,7 @@
             <div class="chart-container mb-4">
                 <h5 class="mb-3">
                     <i class="bi bi-exclamation-triangle text-danger me-2"></i>
-                    Siswa dengan Poin Tertinggi
+                    Siswa dengan Poin pelanggaran Tertinggi
                 </h5>
                 @forelse($topViolators as $index => $violator)
                 <div class="d-flex align-items-center mb-3 pb-3 border-bottom">

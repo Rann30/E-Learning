@@ -14,11 +14,11 @@
                         @method('PUT')
 
                         <div class="mb-3">
-                            <label class="form-label">Kursus</label>
+                            <label class="form-label">Mata pelajaran</label>
                             <select class="form-select @error('course_id') is-invalid @enderror"
                                 name="course_id"
                                 required>
-                                <option value="">-- Pilih Kursus --</option>
+                                <option value="">-- Pilih Mata pelajaran --</option>
                                 @foreach($courses as $course)
                                 <option value="{{ $course->id }}"
                                     {{ old('course_id', $schedule->course_id) == $course->id ? 'selected' : '' }}>

@@ -38,12 +38,7 @@
             <div class="card mt-3">
                 <div class="card-body">
                     <h6 class="mb-3">Statistik</h6>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Kursus Aktif</span>
-                            <strong class="text-primary">{{ $totalCourses }}</strong>
-                        </div>
-                    </div>
+
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
                             <span>Tugas Dikumpulkan</span>
@@ -62,12 +57,7 @@
                             <strong class="text-warning">{{ $attendanceRate }}%</strong>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1">
-                            <span>Poin Pelanggaran</span>
-                            <strong class="text-danger">{{ $student->points }}</strong>
-                        </div>
-                    </div>
+
                     <div>
                         <div class="d-flex justify-content-between mb-1">
                             <span>Badges</span>
@@ -113,49 +103,9 @@
                 </div>
             </div>
 
-            <!-- Enrollments -->
-            <div class="card mb-3">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Kursus yang Diikuti</h5>
-                </div>
-                <div class="card-body">
-                    @forelse($student->enrollments->where('is_active', true) as $enrollment)
-                    <div class="d-flex justify-content-between align-items-center mb-2 pb-2 border-bottom">
-                        <div>
-                            <h6 class="mb-0">{{ $enrollment->course->name }}</h6>
-                            <small class="text-muted">{{ $enrollment->course->code }}</small>
-                        </div>
-                        <span class="badge bg-success">Aktif</span>
-                    </div>
-                    @empty
-                    <p class="text-muted text-center">Belum mengikuti kursus apapun</p>
-                    @endforelse
-                </div>
-            </div>
 
-            <!-- Violation Cards -->
-            <div class="card">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Kartu Pelanggaran</h5>
-                </div>
-                <div class="card-body">
-                    @forelse($student->violationCards as $card)
-                    <div class="alert alert-{{ $card->is_active ? 'danger' : 'secondary' }}">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <strong>{{ $card->card_number }}</strong>
-                                <p class="mb-0 small">{{ $card->description }}</p>
-                            </div>
-                            <span class="badge bg-{{ $card->is_active ? 'danger' : 'secondary' }}">
-                                {{ $card->is_active ? 'Aktif' : 'Tidak Aktif' }}
-                            </span>
-                        </div>
-                    </div>
-                    @empty
-                    <p class="text-muted text-center">Tidak ada kartu pelanggaran</p>
-                    @endforelse
-                </div>
-            </div>
+
+
         </div>
     </div>
 </div>

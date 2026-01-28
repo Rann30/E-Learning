@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
-@section('title', 'Kelola Enrollment')
-@section('page-title', 'Kelola Enrollment')
+@section('title', 'Kelola Pendaftaran mata pelajaran')
+@section('page-title', 'Kelola Pendaftaran mata pelajaran')
 
 @section('content')
 <div class="container-fluid">
@@ -10,7 +10,7 @@
         <div class="card-header bg-primary text-white">
             <h5 class="mb-0">
                 <i class="bi bi-plus-circle me-2"></i>
-                Daftarkan Siswa ke Kursus
+                Daftarkan Siswa ke mata pelajaran
             </h5>
         </div>
         <div class="card-body">
@@ -35,11 +35,11 @@
                     </div>
 
                     <div class="col-md-5">
-                        <label class="form-label">Pilih Kursus</label>
+                        <label class="form-label">Pilih mata pelajaran</label>
                         <select class="form-select @error('course_id') is-invalid @enderror"
                             name="course_id"
                             required>
-                            <option value="">-- Pilih Kursus --</option>
+                            <option value="">-- Pilih mata pelajaran --</option>
                             @foreach($courses as $course)
                             <option value="{{ $course->id }}">
                                 {{ $course->code }} - {{ $course->name }}
@@ -67,7 +67,7 @@
         <div class="card-header bg-white">
             <h5 class="mb-0">
                 <i class="bi bi-list-check text-primary me-2"></i>
-                Daftar Enrollment ({{ $enrollments->total() }})
+                Daftar pendaftaran ({{ $enrollments->total() }})
             </h5>
         </div>
         <div class="card-body">
@@ -79,7 +79,7 @@
                             <th>NIS</th>
                             <th>Nama Siswa</th>
                             <th>Kelas</th>
-                            <th>Kursus</th>
+                            <th>mata pelajaran</th>
                             <th>Status</th>
                             <th>Terdaftar</th>
                             <th>Aksi</th>
@@ -108,7 +108,7 @@
                                 <form action="{{ route('admin.enrollments.destroy', $enrollment->id) }}"
                                     method="POST"
                                     class="d-inline"
-                                    onsubmit="return confirm('Yakin ingin menghapus enrollment ini?')">
+                                    onsubmit="return confirm('Yakin ingin menghapus pendaftaran ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">
@@ -121,7 +121,7 @@
                         <tr>
                             <td colspan="8" class="text-center text-muted py-4">
                                 <i class="bi bi-inbox" style="font-size: 48px;"></i>
-                                <p class="mt-2">Belum ada enrollment</p>
+                                <p class="mt-2">Belum ada Pendaftaran</p>
                             </td>
                         </tr>
                         @endforelse

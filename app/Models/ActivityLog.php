@@ -9,12 +9,20 @@ class ActivityLog extends Model
 {
     use HasFactory;
 
-    protected $table = 'activity_logs';
-
     protected $fillable = [
         'user_id',
         'action',
+        'model',
+        'model_id',
         'description',
-        'ip_address',
+        'ip_address'
     ];
+
+    /**
+     * Relasi ke User
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
