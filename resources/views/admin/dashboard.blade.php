@@ -90,36 +90,33 @@
                     <i class="bi bi-journal-code"></i>
                 </div>
                 <div class="stat-value text-warning">{{ $totalCourses }}</div>
-                <div class="stat-label">Total mata pelajaran</div>
+                <div class="stat-label">Total Mata Pelajaran</div>
             </div>
         </div>
 
         <div class="col-xl-3 col-md-6 mb-4">
-
+            <div class="stat-card" style="border-left-color: #8b5cf6;">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); color: white;">
+                    <i class="bi bi-file-text"></i>
+                </div>
+                <div class="stat-value text-purple">{{ $totalAssignments }}</div>
+                <div class="stat-label">Total Tugas</div>
+            </div>
         </div>
     </div>
 
     <!-- Secondary Stats -->
     <div class="row mb-4">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <i class="bi bi-file-text text-primary" style="font-size: 36px;"></i>
-                    <h4 class="mt-2 mb-0">{{ $totalAssignments }}</h4>
-                    <small class="text-muted">Total Tugas</small>
+                    <i class="bi bi-person-check text-success" style="font-size: 36px;"></i>
+                    <h4 class="mt-2 mb-0">{{ $totalEnrollments }}</h4>
+                    <small class="text-muted">Total Pendaftaran Aktif</small>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-exclamation-triangle text-danger" style="font-size: 36px;"></i>
-                    <h4 class="mt-2 mb-0">{{ $activeViolationCards }}</h4>
-                    <small class="text-muted">Kartu Pelanggaran Aktif</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="bi bi-shield-check text-success" style="font-size: 36px;"></i>
@@ -128,7 +125,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
                     <i class="bi bi-calendar-check text-info" style="font-size: 36px;"></i>
@@ -180,13 +177,13 @@
             <div class="chart-container mb-4">
                 <h5 class="mb-3">
                     <i class="bi bi-graph-up text-success me-2"></i>
-                    mata pelajaran Terpopuler
+                    Mata Pelajaran Terpopuler
                 </h5>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="table-light">
                             <tr>
-                                <th>mata pelajaran</th>
+                                <th>Mata Pelajaran</th>
                                 <th>Kode</th>
                                 <th>Guru</th>
                                 <th>Siswa</th>
@@ -259,42 +256,14 @@
                         <i class="bi bi-plus-circle me-2"></i>Tambah User Baru
                     </a>
                     <a href="{{ route('admin.courses.index') }}" class="btn btn-success">
-                        <i class="bi bi-journal-plus me-2"></i> mata pelajaran </a>
+                        <i class="bi bi-journal-plus me-2"></i>Kelola Mata Pelajaran
+                    </a>
                     <a href="{{ route('admin.announcements.create') }}" class="btn btn-info">
                         <i class="bi bi-megaphone me-2"></i>Buat Pengumuman
-                    </a>
-                    <a href="{{ route('admin.reports.index') }}" class="btn btn-warning">
-                        <i class="bi bi-file-earmark-text me-2"></i>Lihat Laporan
                     </a>
                 </div>
             </div>
 
-            <!-- Top Violators -->
-            <div class="chart-container mb-4">
-                <h5 class="mb-3">
-                    <i class="bi bi-exclamation-triangle text-danger me-2"></i>
-                    Siswa dengan Poin pelanggaran Tertinggi
-                </h5>
-                @forelse($topViolators as $index => $violator)
-                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
-                    <div class="flex-shrink-0">
-                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center"
-                            style="width: 40px; height: 40px; font-weight: bold;">
-                            {{ $index + 1 }}
-                        </div>
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h6 class="mb-0">{{ $violator->user->name }}</h6>
-                        <small class="text-muted">{{ $violator->class }}</small>
-                    </div>
-                    <div>
-                        <span class="badge bg-danger">{{ $violator->points }} poin</span>
-                    </div>
-                </div>
-                @empty
-                <p class="text-muted text-center">Tidak ada data</p>
-                @endforelse
-            </div>
             <!-- Recent Users -->
             <div class="chart-container">
                 <h5 class="mb-3">
@@ -319,4 +288,3 @@
     </div>
 </div>
 @endsection
-```

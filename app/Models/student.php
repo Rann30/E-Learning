@@ -29,10 +29,7 @@ class Student extends Model
         return $this->hasMany(Enrollment::class);
     }
 
-    public function violationCards()
-    {
-        return $this->hasMany(ViolationCard::class);
-    }
+
 
     public function assignmentSubmissions()
     {

@@ -115,10 +115,6 @@ Route::middleware(['auth', 'admin'])
         Route::get('/attendances', [App\Http\Controllers\Admin\AttendanceController::class, 'index'])->name('attendances.index');
         Route::post('/attendances', [App\Http\Controllers\Admin\AttendanceController::class, 'store'])->name('attendances.store');
 
-        Route::get('/violations', [App\Http\Controllers\Admin\ViolationController::class, 'index'])->name('violations.index');
-        Route::get('/violations/create', [App\Http\Controllers\Admin\ViolationController::class, 'create'])->name('violations.create');
-        Route::post('/violations', [App\Http\Controllers\Admin\ViolationController::class, 'store'])->name('violations.store');
-        Route::delete('/violations/{id}', [App\Http\Controllers\Admin\ViolationController::class, 'destroy'])->name('violations.destroy');
 
         Route::get('/reports', [App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
         Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings');

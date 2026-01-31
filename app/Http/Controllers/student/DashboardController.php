@@ -22,9 +22,7 @@ class DashboardController extends Controller
                 ->with('error', 'Data student tidak ditemukan');
         }
 
-        $violationCard = $student->violationCards()
-            ->where('is_active', true)
-            ->first();
+
 
         $enrollments = $student->enrollments()
             ->where('is_active', true)
@@ -84,17 +82,13 @@ class DashboardController extends Controller
 
         return view('student.dashboard', compact(
             'student',
-            'violationCard',
-            'totalCourses',
-            'enrollments',
             'announcements',
             'upcomingAssignments',
-            'submittedAssignments',
-            'todaySchedules',
-            'today', // Tambahkan ini
-            'attendanceStats',
             'attendancePercentage',
-            'averageScore'
+            'averageScore',
+            'todaySchedules',
+            'attendanceStats',
+            'today'
         ));
     }
 

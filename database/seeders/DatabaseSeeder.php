@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Student;
-use App\Models\ViolationCard;
+
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Announcement;
@@ -117,8 +117,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-        ViolationCard::firstOrCreate(
-     
+
 
         // ============ COURSES ============
 

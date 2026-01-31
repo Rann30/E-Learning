@@ -9,7 +9,7 @@ use App\Models\Student;
 use App\Models\Course;
 use App\Models\Enrollment;
 use App\Models\Assignment;
-use App\Models\ViolationCard;
+
 use App\Models\ActivityLog;
 use App\Models\Attendance;
 use Carbon\Carbon;
@@ -25,7 +25,6 @@ class DashboardController extends Controller
         $totalCourses = Course::count();
         $totalEnrollments = Enrollment::where('is_active', true)->count();
         $totalAssignments = Assignment::count();
-        $activeViolationCards = ViolationCard::where('is_active', true)->count();
 
         // Recent Activities (10 terakhir)
         $recentActivities = ActivityLog::with('user')
@@ -36,11 +35,7 @@ class DashboardController extends Controller
         // Recent Users (5 terakhir)
         $recentUsers = User::latest()->take(5)->get();
 
-        // Students dengan poin pelanggaran tertinggi
-        $topViolators = Student::orderBy('points', 'desc')
-            ->with('user')
-            ->take(5)
-            ->get();
+
 
         // Enrollment per bulan (6 bulan terakhir)
         $enrollmentStats = [];
@@ -75,10 +70,10 @@ class DashboardController extends Controller
             'totalCourses',
             'totalEnrollments',
             'totalAssignments',
-            'activeViolationCards',
+
             'recentActivities',
             'recentUsers',
-            'topViolators',
+
             'enrollmentStats',
             'todayAttendance',
             'popularCourses'

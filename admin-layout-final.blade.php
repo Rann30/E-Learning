@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Admin Dashboard') - SIPANDA </title>
+    <title>@yield('title', 'Admin Dashboard') - E-Learning</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -225,7 +225,7 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                 <i class="bi bi-mortarboard-fill me-2"></i>
-                SIPANDA
+                E-Learning Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -238,8 +238,8 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                           data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
@@ -300,7 +300,13 @@
                                 Tugas
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.attendance.*') ? 'active' : '' }}"
+                                href="{{ route('admin.attendance.index') }}">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                Kehadiran
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.announcements.*') ? 'active' : '' }}"
                                 href="{{ route('admin.announcements.index') }}">
@@ -308,15 +314,21 @@
                                 Pengumuman
                             </a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}"
+                                href="{{ route('admin.reports.index') }}">
+                                <i class="bi bi-file-earmark-text me-2"></i>
+                                Laporan
+                            </a>
+                        </li>
                     </ul>
 
                     <hr class="my-3" style="border-color: var(--primary-light);">
 
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}"
-                                href="{{ route('admin.settings') }}">
+                            <a class="nav-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}" 
+                               href="{{ route('admin.settings') }}">
                                 <i class="bi bi-gear me-2"></i>
                                 Settings
                             </a>
@@ -340,9 +352,9 @@
 
                 <!-- Alerts -->
                 @if(session('success'))
-                <div class="alert alert-dismissible fade show shadow-sm"
-                    style="background: linear-gradient(135deg, #c5ebb3 0%, #A8DF8E 100%); border: none; color: #2d3748;"
-                    role="alert">
+                <div class="alert alert-dismissible fade show shadow-sm" 
+                     style="background: linear-gradient(135deg, #c5ebb3 0%, #A8DF8E 100%); border: none; color: #2d3748;" 
+                     role="alert">
                     <i class="bi bi-check-circle-fill me-2"></i>
                     <strong>Berhasil!</strong> {{ session('success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -350,9 +362,9 @@
                 @endif
 
                 @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show shadow-sm"
-                    style="border: none;"
-                    role="alert">
+                <div class="alert alert-danger alert-dismissible fade show shadow-sm" 
+                     style="border: none;" 
+                     role="alert">
                     <i class="bi bi-exclamation-triangle-fill me-2"></i>
                     <strong>Error!</strong> {{ session('error') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -360,9 +372,9 @@
                 @endif
 
                 @if(session('warning'))
-                <div class="alert alert-dismissible fade show shadow-sm"
-                    style="background: linear-gradient(135deg, #FFF5E0 0%, #FFE5A8 100%); border: none; color: #2d3748;"
-                    role="alert">
+                <div class="alert alert-dismissible fade show shadow-sm" 
+                     style="background: linear-gradient(135deg, #FFF5E0 0%, #FFE5A8 100%); border: none; color: #2d3748;" 
+                     role="alert">
                     <i class="bi bi-exclamation-circle-fill me-2"></i>
                     <strong>Peringatan!</strong> {{ session('warning') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -370,9 +382,9 @@
                 @endif
 
                 @if(session('info'))
-                <div class="alert alert-dismissible fade show shadow-sm"
-                    style="background: linear-gradient(135deg, #fff0f3 0%, #FFD8DF 100%); border: none; color: #2d3748;"
-                    role="alert">
+                <div class="alert alert-dismissible fade show shadow-sm" 
+                     style="background: linear-gradient(135deg, #fff0f3 0%, #FFD8DF 100%); border: none; color: #2d3748;" 
+                     role="alert">
                     <i class="bi bi-info-circle-fill me-2"></i>
                     <strong>Info!</strong> {{ session('info') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -392,10 +404,10 @@
                 <div class="col-md-12">
                     <p class="mb-1 fw-bold">
                         <i class="bi bi-mortarboard-fill me-2"></i>
-                        SIPANDA - Sistem Informasi Akademik Terpadu
+                        E-Learning System
                     </p>
-                    <p class="mb-0 small">&copy; {{ date('Y') }} All rights reserved. Made with
-                        <i class="bi bi-heart-fill text-danger"></i> for a better education.
+                    <p class="mb-0 small">&copy; {{ date('Y') }} All rights reserved. Made with 
+                        <i class="bi bi-heart-fill text-danger"></i> for education
                     </p>
                 </div>
             </div>
@@ -421,7 +433,7 @@
         // Mobile sidebar toggle
         const sidebarToggle = document.querySelector('.navbar-toggler');
         const sidebar = document.querySelector('.sidebar');
-
+        
         if (window.innerWidth <= 768) {
             sidebarToggle?.addEventListener('click', function() {
                 sidebar?.classList.toggle('show');
