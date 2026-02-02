@@ -220,17 +220,20 @@ class DatabaseSeeder extends Seeder
         $assignment1 = Assignment::firstOrCreate(
             ['title' => 'Membuat Website E-Commerce'],
             [
-                'course_id' => $course1->id,
-                'description' => 'Buat website e-commerce sederhana dengan fitur CRUD produk, keranjang belanja, dan checkout.',
-                'deadline' => Carbon::now()->addDays(7),
-                'max_score' => 100
+                'course_id'  => $course1->id,
+                'teacher_id' => $course1->teacher_id, // 🔥 WAJIB
+                'description'=> 'Buat website e-commerce sederhana dengan fitur CRUD produk.',
+                'deadline'   => Carbon::now()->addDays(7),
+                'max_score'  => 100
             ]
         );
+        
 
         $assignment2 = Assignment::firstOrCreate(
             ['title' => 'Database Design E-Learning'],
             [
                 'course_id' => $course2->id,
+                'teacher_id' => $course1->teacher_id,
                 'description' => 'Buat ERD dan implementasi database untuk sistem e-learning.',
                 'deadline' => Carbon::now()->addDays(5),
                 'max_score' => 100
@@ -241,6 +244,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Aplikasi Todo List Android'],
             [
                 'course_id' => $course3->id,
+                'teacher_id' => $course1->teacher_id,
                 'description' => 'Buat aplikasi todo list dengan fitur tambah, edit, hapus, dan simpan ke database.',
                 'deadline' => Carbon::now()->addDays(10),
                 'max_score' => 100
@@ -251,6 +255,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Quiz Laravel Authentication'],
             [
                 'course_id' => $course1->id,
+                'teacher_id' => $course1->teacher_id,
                 'description' => 'Implementasi sistem login dan register dengan Laravel Breeze atau custom.',
                 'deadline' => Carbon::now()->addDays(3),
                 'max_score' => 100
