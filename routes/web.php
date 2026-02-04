@@ -5,17 +5,27 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
+use App\Http\Controllers\Teacher\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 
-Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::get('/', [SettingController::class, 'index'])->name('index');
-        Route::put('/update', [SettingController::class, 'update'])->name('update');
-        Route::post('/clear-cache', [SettingController::class, 'clearCache'])->name('clear-cache');
-        Route::post('/backup', [SettingController::class, 'backup'])->name('backup');
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::get('/', [SettingController::class, 'index'])->name('index');
+            Route::put('/update', [SettingController::class, 'update'])->name('update');
+            Route::post('/clear-cache', [SettingController::class, 'clearCache'])->name('clear-cache');
+            Route::post('/backup', [SettingController::class, 'backup'])->name('backup');
+        });
+
+        // route admin lain...
     });
-});
+
 
 
 /*
@@ -29,10 +39,14 @@ Route::get('/', function () {
         return redirect()->route('login');
     }
 
-    return auth()->user()->role === 'admin'
-        ? redirect()->route('admin.dashboard')
-        : redirect()->route('student.dashboard');
+    return match (auth()->user()->role) {
+        'student' => redirect()->route('student.dashboard'),
+        'teacher' => redirect()->route('teacher.dashboard'),
+        'admin'   => redirect()->route('admin.dashboard'),
+        default   => abort(403),
+    };
 });
+
 
 
 
@@ -86,6 +100,49 @@ Route::middleware(['auth', 'student'])
         Route::get('/prakerin', [App\Http\Controllers\Student\PrakerinController::class, 'index'])->name('prakerin');
         Route::get('/announcements', [App\Http\Controllers\Student\AnnouncementController::class, 'index'])->name('announcements');
         Route::get('/profile', [App\Http\Controllers\Student\ProfileController::class, 'index'])->name('profile');
+    });
+
+/*
+|--------------------------------------------------------------------------
+| TEACHER ROUTES
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'teacher'])
+    ->prefix('teacher')
+    ->name('teacher.')
+    ->group(function () {
+
+        Route::get('/dashboard', [App\Http\Controllers\Teacher\DashboardController::class, 'index'])
+            ->name('dashboard');
+
+        // // Pilih kelas
+        Route::get('/courses', [App\Http\Controllers\Teacher\CourseController::class, 'index'])
+            ->name('courses.index');
+
+        Route::get('/courses/{course}', [App\Http\Controllers\Teacher\CourseController::class, 'show'])
+            ->name('courses.show');
+
+        // Assignment (Tugas)
+        Route::get('/assignments', [App\Http\Controllers\Teacher\AssignmentController::class, 'index'])
+            ->name('assignments.index');
+
+        Route::get('/assignments/create', [App\Http\Controllers\Teacher\AssignmentController::class, 'create'])
+            ->name('assignments.create');
+
+        Route::post('/assignments', [App\Http\Controllers\Teacher\AssignmentController::class, 'store'])
+            ->name('assignments.store');
+
+        Route::get('/assignments/{assignment}', [App\Http\Controllers\Teacher\AssignmentController::class, 'show'])
+            ->name('assignments.show');
+
+        Route::get('/assignments/{assignment}/edit', [App\Http\Controllers\Teacher\AssignmentController::class, 'edit'])
+            ->name('assignments.edit');
+
+        Route::put('/assignments/{assignment}', [App\Http\Controllers\Teacher\AssignmentController::class, 'update'])
+            ->name('assignments.update');
+
+        Route::delete('/assignments/{assignment}', [App\Http\Controllers\Teacher\AssignmentController::class, 'destroy'])
+            ->name('assignments.destroy');
     });
 
 /*
