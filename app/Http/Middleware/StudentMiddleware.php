@@ -10,10 +10,14 @@ class StudentMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() && auth()->user()->role === 'student') {
-            return $next($request);
+        if (!auth()->check()) {
+            return redirect()->route('login');
         }
 
-        abort(403, 'Unauthorized access');
+        if (auth()->user()->role !== 'student') {
+            abort(403, 'Bukan student');
+        }
+
+        return $next($request);
     }
 }

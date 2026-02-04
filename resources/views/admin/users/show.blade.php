@@ -92,23 +92,12 @@
                             </span>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4"><strong>Poin Pelanggaran:</strong></div>
-                        <div class="col-md-8">
-                            <span class="badge bg-danger">{{ $user->student->points }} poin</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4"><strong>Badges:</strong></div>
-                        <div class="col-md-8">
-                            <span class="badge bg-info">{{ $user->student->badges }} badges</span>
-                        </div>
-                    </div>
+
                     @endif
 
                     @if($user->role === 'teacher')
                     <hr>
-                    <h6 class="mt-4 mb-3">Kursus yang Diajar</h6>
+                    <h6 class="mt-4 mb-3">mata pelajaran yang Diajar</h6>
                     @if($user->courses && $user->courses->count() > 0)
                     @foreach($user->courses as $course)
                     <div class="alert alert-info mb-2">
@@ -116,7 +105,7 @@
                     </div>
                     @endforeach
                     @else
-                    <p class="text-muted">Belum mengajar kursus apapun</p>
+                    <p class="text-muted">Belum mengajar mata pelajaran apapun</p>
                     @endif
                     @endif
                 </div>

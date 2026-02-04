@@ -159,18 +159,10 @@
             alt="Profile" class="profile-avatar">
         <div class="profile-details">
             <h2>{{ Auth::user()->name }}</h2>
-            <p><i class="bi bi-person-badge me-2"></i>Student</p>
+            <p><i class="bi bi-person-badge me-2"></i>Siswa</p>
             <p><i class="bi bi-geo-alt me-2"></i>{{ $student->class }}</p>
             <p><i class="bi bi-clock me-2"></i>{{ $student->status }}</p>
         </div>
-    </div>
-
-    <div class="badge-container">
-        @if($student->badges > 0)
-        @for($i = 0; $i < min($student->badges, 3); $i++)
-            <img src="https://cdn-icons-png.flaticon.com/512/744/744984.png" alt="Badge" class="badge-item">
-            @endfor
-            @endif
     </div>
 
     <a href="{{ route('student.edit-profile') }}"
@@ -178,9 +170,7 @@
         <i class="bi bi-pencil me-2"></i> Edit Profile
     </a>
 
-    <div class="profile-date">
-        {{ now()->format('d F Y H:i A') }}
-    </div>
+
 
 </div>
 
@@ -195,13 +185,7 @@
             <div>Tugas Aktif</div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-            <i class="bi bi-percent" style="font-size: 30px;"></i>
-            <div class="stat-value">{{ $attendancePercentage }}%</div>
-            <div>Kehadiran</div>
-        </div>
-    </div>
+
     <div class="col-md-3">
         <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
             <i class="bi bi-trophy" style="font-size: 30px;"></i>
@@ -215,35 +199,7 @@
     <!-- Left Column -->
     <div class="col-md-8">
         <!-- Pengumuman -->
-        <div class="card mb-4">
-            <div class="card-body">
-                <h5 class="card-title mb-3">
-                    <i class="bi bi-megaphone text-primary me-2"></i>
-                    Pengumuman Terbaru
-                </h5>
-                @forelse($announcements as $announcement)
-                <div class="announcement-item">
-                    <div class="d-flex justify-content-between align-items-start">
-                        <div>
-                            <h6 class="mb-1">{{ $announcement->title }}</h6>
-                            <p class="mb-1 text-muted small">{{ Str::limit($announcement->content, 100) }}</p>
-                            <small class="text-muted">
-                                <i class="bi bi-clock me-1"></i>{{ $announcement->created_at->diffForHumans() }}
-                            </small>
-                        </div>
-                        <span class="badge bg-{{ $announcement->type === 'warning' ? 'warning' : 'info' }}">
-                            {{ ucfirst($announcement->type) }}
-                        </span>
-                    </div>
-                </div>
-                @empty
-                <div class="text-center text-muted py-4">
-                    <i class="bi bi-inbox" style="font-size: 48px;"></i>
-                    <p class="mt-2">Belum ada pengumuman</p>
-                </div>
-                @endforelse
-            </div>
-        </div>
+
 
         <!-- Tugas -->
         <div class="card mb-4">
@@ -313,57 +269,12 @@
         </div>
     </div>
 
-    <!-- Right Column -->
-    <div class="col-md-4">
-        <!-- Poin Saya -->
-        <div class="card mb-4">
-            <div class="card-body text-center">
-                <h5 class="card-title">
-                    <i class="bi bi-award text-warning me-2"></i>
-                    Poin Saya
-                </h5>
-                <div class="display-4 text-primary my-3">{{ $student->points }}</div>
-                <p class="text-muted mb-0">Total Poin Pelanggaran</p>
-            </div>
-        </div>
 
 
 
-        <!-- Kehadiran Bulan Ini -->
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title mb-3">
-                    <i class="bi bi-calendar-check text-primary me-2"></i>
-                    Kehadiran Bulan Ini
-                </h5>
-                <div class="mb-3">
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Hadir</span>
-                        <strong class="text-success">{{ $attendanceStats->get('hadir', 0) }}</strong>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Izin</span>
-                        <strong class="text-warning">{{ $attendanceStats->get('izin', 0) }}</strong>
-                    </div>
-                    <div class="d-flex justify-content-between mb-2">
-                        <span>Sakit</span>
-                        <strong class="text-info">{{ $attendanceStats->get('sakit', 0) }}</strong>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span>Alpha</span>
-                        <strong class="text-danger">{{ $attendanceStats->get('alpha', 0) }}</strong>
-                    </div>
-                </div>
-                <div class="progress" style="height: 25px;">
-                    <div class="progress-bar bg-success"
-                        role="progressbar"
-                        style="width: {{ $attendancePercentage }}%">
-                        {{ $attendancePercentage }}%
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+
+</div>
 </div>
 @endsection
 ```

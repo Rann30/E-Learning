@@ -57,39 +57,7 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Statistik</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row text-center">
-                        <div class="col-md-3 mb-3">
-                            <div class="p-3 bg-light rounded">
-                                <h3 class="text-primary">{{ $student->enrollments()->where('is_active', true)->count() }}</h3>
-                                <small class="text-muted">Kursus Aktif</small>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="p-3 bg-light rounded">
-                                <h3 class="text-success">{{ $student->assignmentSubmissions()->count() }}</h3>
-                                <small class="text-muted">Tugas Dikumpulkan</small>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="p-3 bg-light rounded">
-                                <h3 class="text-warning">{{ $student->badges }}</h3>
-                                <small class="text-muted">Badges</small>
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <div class="p-3 bg-light rounded">
-                                <h3 class="text-danger">{{ $student->points }}</h3>
-                                <small class="text-muted">Poin Pelanggaran</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

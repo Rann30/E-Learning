@@ -15,14 +15,38 @@ class ActivityLog extends Model
         'model',
         'model_id',
         'description',
-        'ip_address'
+        'properties',
+        'ip_address',
+        'user_agent',
+    ];
+
+    protected $casts = [
+        'properties' => 'array',
+        'created_at' => 'datetime',
     ];
 
     /**
-     * Relasi ke User
+     * Get the user that performed the action
      */
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Log an activity
+     */
+    public static function log(string $action, string $description, ?Model $model = null, array $properties = [])
+    {
+        return self::create([
+            'user_id' => auth()->id(),
+            'action' => $action,
+            'model' => $model ? get_class($model) : null,
+            'model_id' => $model ? $model->id : null,
+            'description' => $description,
+            'properties' => $properties,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
     }
 }

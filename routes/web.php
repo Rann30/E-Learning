@@ -6,6 +6,16 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboard;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SettingController;
+
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::put('/update', [SettingController::class, 'update'])->name('update');
+        Route::post('/clear-cache', [SettingController::class, 'clearCache'])->name('clear-cache');
+        Route::post('/backup', [SettingController::class, 'backup'])->name('backup');
+    });
+});
 
 
 /*
@@ -19,12 +29,12 @@ Route::get('/', function () {
         return redirect()->route('login');
     }
 
-    return match (auth()->user()->role) {
-        'student' => redirect()->route('student.dashboard'),
-        'admin'   => redirect()->route('admin.dashboard'),
-        default   => abort(403),
-    };
+    return auth()->user()->role === 'admin'
+        ? redirect()->route('admin.dashboard')
+        : redirect()->route('student.dashboard');
 });
+
+
 
 /*
 |--------------------------------------------------------------------------

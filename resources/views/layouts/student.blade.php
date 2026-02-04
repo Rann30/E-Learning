@@ -248,31 +248,20 @@
                 </a>
             </li>
 
-            <li class="menu-section">KEHADIRAN</li>
-            <li>
-                <a href="{{ route('student.attendance') }}" class="{{ request()->routeIs('student.attendance') ? 'active' : '' }}">
-                    <i class="bi bi-calendar-check"></i>
-                    <span>Data Kehadiran</span>
-                </a>
-            </li>
 
-            <!-- <li class="menu-section">JADWAL</li>
+
+            <li class="menu-section">JADWAL</li>
             <li>
                 <a href="{{ route('student.schedule') }}" class="{{ request()->routeIs('student.schedule') ? 'active' : '' }}">
                     <i class="bi bi-calendar-event"></i>
                     <span>Jadwal Kelas</span>
                 </a>
-            </li> -->
+            </li>
 
 
 
             <li class="menu-section">LAINNYA</li>
-            <li>
-                <a href="{{ route('student.announcements') }}" class="{{ request()->routeIs('student.announcements') ? 'active' : '' }}">
-                    <i class="bi bi-megaphone"></i>
-                    <span>Pengumuman</span>
-                </a>
-            </li>
+
             <li>
                 <a href="{{ route('student.profile') }}" class="{{ request()->routeIs('student.profile') ? 'active' : '' }}">
                     <i class="bi bi-person-circle"></i>
@@ -281,13 +270,18 @@
             </li>
         </ul>
 
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit" class="logout-btn">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Logout</span>
-            </button>
-        </form>
+        <div class="logout-section">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="logout-btn">
+                    <span>🚪</span>
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+
+
     </div>
 
     <!-- Main Content -->

@@ -13,6 +13,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         transition: all 0.3s;
         border-left: 4px solid;
+        height: 100%;
     }
 
     .stat-card:hover {
@@ -35,20 +36,31 @@
         font-size: 32px;
         font-weight: bold;
         margin-bottom: 5px;
+        line-height: 1;
     }
 
     .stat-label {
         color: #6b7280;
         font-size: 14px;
+        font-weight: 500;
     }
 
     .activity-item {
-        padding: 12px 0;
+        padding: 15px 0;
         border-bottom: 1px solid #e5e7eb;
+        transition: background-color 0.2s;
     }
 
     .activity-item:last-child {
         border-bottom: none;
+    }
+
+    .activity-item:hover {
+        background-color: #f9fafb;
+        margin: 0 -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 8px;
     }
 
     .chart-container {
@@ -56,6 +68,61 @@
         border-radius: 15px;
         padding: 25px;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+    }
+
+    .user-item {
+        padding: 12px;
+        border-radius: 8px;
+        transition: background-color 0.2s;
+        margin-bottom: 10px;
+    }
+
+    .user-item:hover {
+        background-color: #f3f4f6;
+    }
+
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .quick-action-btn {
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+
+    .quick-action-btn:hover {
+        transform: translateX(5px);
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+
+    .section-title i {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .empty-state {
+        padding: 40px 20px;
+        text-align: center;
+        color: #9ca3af;
+    }
+
+    .empty-state i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        opacity: 0.5;
     }
 </style>
 @endpush
@@ -64,225 +131,160 @@
 <div class="container-fluid">
     <!-- Statistics Cards -->
     <div class="row mb-4">
+        <!-- Total Students -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="border-left-color: #3b82f6;">
+            <div class="stat-card" style="border-left-color: #667eea;">
                 <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-                    <i class="bi bi-people"></i>
+                    <i class="bi bi-people-fill"></i>
                 </div>
-                <div class="stat-value text-primary">{{ $totalStudents }}</div>
+                <div class="stat-value" style="color: #667eea;">{{ $totalStudents ?? 0 }}</div>
                 <div class="stat-label">Total Siswa</div>
             </div>
         </div>
 
+        <!-- Total Teachers -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="border-left-color: #10b981;">
+            <div class="stat-card" style="border-left-color: #11998e;">
                 <div class="stat-icon" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;">
                     <i class="bi bi-person-workspace"></i>
                 </div>
-                <div class="stat-value text-success">{{ $totalTeachers }}</div>
+                <div class="stat-value" style="color: #11998e;">{{ $totalTeachers ?? 0 }}</div>
                 <div class="stat-label">Total Guru</div>
             </div>
         </div>
 
+        <!-- Total Courses -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="border-left-color: #f59e0b;">
+            <div class="stat-card" style="border-left-color: #f093fb;">
                 <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
-                    <i class="bi bi-journal-code"></i>
+                    <i class="bi bi-journal-bookmark-fill"></i>
                 </div>
-                <div class="stat-value text-warning">{{ $totalCourses }}</div>
-                <div class="stat-label">Total Mata Pelajaran</div>
+                <div class="stat-value" style="color: #f093fb;">{{ $totalCourses ?? 0 }}</div>
+                <div class="stat-label">Mata Pelajaran</div>
             </div>
         </div>
 
+        <!-- Total Classes -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="stat-card" style="border-left-color: #8b5cf6;">
-                <div class="stat-icon" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); color: white;">
-                    <i class="bi bi-file-text"></i>
+            <div class="stat-card" style="border-left-color: #ffa726;">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%); color: white;">
+                    <i class="bi bi-door-open-fill"></i>
                 </div>
-                <div class="stat-value text-purple">{{ $totalAssignments }}</div>
-                <div class="stat-label">Total Tugas</div>
+                <div class="stat-value" style="color: #ffa726;">{{ $totalClasses ?? 0 }}</div>
+                <div class="stat-label">Total Kelas</div>
             </div>
         </div>
     </div>
 
-    <!-- Secondary Stats -->
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-person-check text-success" style="font-size: 36px;"></i>
-                    <h4 class="mt-2 mb-0">{{ $totalEnrollments }}</h4>
-                    <small class="text-muted">Total Pendaftaran Aktif</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-shield-check text-success" style="font-size: 36px;"></i>
-                    <h4 class="mt-2 mb-0">{{ $totalAdmins }}</h4>
-                    <small class="text-muted">Total Admin</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body text-center">
-                    <i class="bi bi-calendar-check text-info" style="font-size: 36px;"></i>
-                    <h4 class="mt-2 mb-0">{{ array_sum($todayAttendance) }}</h4>
-                    <small class="text-muted">Kehadiran Hari Ini</small>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Main Content Row -->
     <div class="row">
-        <!-- Left Column -->
-        <div class="col-lg-8">
-            <!-- Kehadiran Hari Ini -->
-            <div class="chart-container mb-4">
-                <h5 class="mb-3">
-                    <i class="bi bi-calendar-check text-primary me-2"></i>
-                    Kehadiran Hari Ini
-                </h5>
-                <div class="row text-center">
-                    <div class="col-3">
-                        <div class="p-3" style="background: #d1fae5; border-radius: 10px;">
-                            <h3 class="text-success mb-0">{{ $todayAttendance['hadir'] }}</h3>
-                            <small>Hadir</small>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="p-3" style="background: #fef3c7; border-radius: 10px;">
-                            <h3 class="text-warning mb-0">{{ $todayAttendance['izin'] }}</h3>
-                            <small>Izin</small>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="p-3" style="background: #dbeafe; border-radius: 10px;">
-                            <h3 class="text-info mb-0">{{ $todayAttendance['sakit'] }}</h3>
-                            <small>Sakit</small>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="p-3" style="background: #fee2e2; border-radius: 10px;">
-                            <h3 class="text-danger mb-0">{{ $todayAttendance['alpha'] }}</h3>
-                            <small>Alpha</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Popular Courses -->
-            <div class="chart-container mb-4">
-                <h5 class="mb-3">
-                    <i class="bi bi-graph-up text-success me-2"></i>
-                    Mata Pelajaran Terpopuler
-                </h5>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Mata Pelajaran</th>
-                                <th>Kode</th>
-                                <th>Guru</th>
-                                <th>Siswa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($popularCourses as $course)
-                            <tr>
-                                <td><strong>{{ $course->name }}</strong></td>
-                                <td><span class="badge bg-primary">{{ $course->code }}</span></td>
-                                <td>{{ $course->teacher->name }}</td>
-                                <td><span class="badge bg-success">{{ $course->enrollments_count }} siswa</span></td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Recent Activities -->
+        <!-- Left Column - Activities -->
+        <div class="col-lg-8 mb-4">
             <div class="chart-container">
-                <h5 class="mb-3">
-                    <i class="bi bi-clock-history text-info me-2"></i>
+                <h5 class="section-title">
+                    <i class="bi bi-clock-history text-info"></i>
                     Aktivitas Terbaru
                 </h5>
-                @forelse($recentActivities as $activity)
-                <div class="activity-item">
-                    <div class="d-flex align-items-start">
-                        <div class="flex-shrink-0">
-                            <div class="rounded-circle bg-light p-2">
-                                @if($activity->action === 'create')
-                                <i class="bi bi-plus-circle text-success"></i>
-                                @elseif($activity->action === 'update')
-                                <i class="bi bi-pencil text-primary"></i>
-                                @elseif($activity->action === 'delete')
-                                <i class="bi bi-trash text-danger"></i>
-                                @else
-                                <i class="bi bi-dot text-secondary"></i>
-                                @endif
+
+                <div class="activities-list">
+                    @if(isset($recentActivities) && $recentActivities->count() > 0)
+                    @foreach($recentActivities as $activity)
+                    <div class="activity-item">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center"
+                                    style="width: 40px; height: 40px; background-color: 
+                                         @if($activity->action === 'create') #dcfce7
+                                         @elseif($activity->action === 'update') #dbeafe
+                                         @elseif($activity->action === 'delete') #fee2e2
+                                         @else #f3f4f6
+                                         @endif">
+                                    @if($activity->action === 'create')
+                                    <i class="bi bi-plus-circle-fill text-success"></i>
+                                    @elseif($activity->action === 'update')
+                                    <i class="bi bi-pencil-fill text-primary"></i>
+                                    @elseif($activity->action === 'delete')
+                                    <i class="bi bi-trash-fill text-danger"></i>
+                                    @else
+                                    <i class="bi bi-dot text-secondary"></i>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="mb-1">
+                                    <strong style="color: #1f2937;">{{ $activity->user->name ?? 'System' }}</strong>
+                                    <span style="color: #4b5563;">{{ $activity->description }}</span>
+                                </p>
+                                <small class="text-muted">
+                                    <i class="bi bi-clock me-1"></i>
+                                    {{ $activity->created_at->diffForHumans() }}
+                                </small>
                             </div>
                         </div>
-                        <div class="flex-grow-1 ms-3">
-                            <p class="mb-0">
-                                <strong>{{ $activity->user->name ?? 'System' }}</strong>
-                                {{ $activity->description }}
-                            </p>
-                            <small class="text-muted">
-                                <i class="bi bi-clock me-1"></i>
-                                {{ $activity->created_at->diffForHumans() }}
-                            </small>
-                        </div>
                     </div>
+                    @endforeach
+                    @else
+                    <div class="empty-state">
+                        <i class="bi bi-inbox"></i>
+                        <p class="mb-0">Belum ada aktivitas terbaru</p>
+                    </div>
+                    @endif
                 </div>
-                @empty
-                <p class="text-muted text-center">Belum ada aktivitas</p>
-                @endforelse
             </div>
         </div>
 
         <!-- Right Column -->
         <div class="col-lg-4">
             <!-- Quick Actions -->
-            <div class="chart-container mb-4">
-                <h5 class="mb-3">
-                    <i class="bi bi-lightning text-warning me-2"></i>
+            <div class="chart-container">
+                <h5 class="section-title">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i>
                     Quick Actions
                 </h5>
-                <div class="d-grid gap-2">
-                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-                        <i class="bi bi-plus-circle me-2"></i>Tambah User Baru
+                <div class="d-grid gap-3">
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary quick-action-btn">
+                        <i class="bi bi-person-plus-fill me-2"></i>Tambah User Baru
                     </a>
-                    <a href="{{ route('admin.courses.index') }}" class="btn btn-success">
+                    <a href="{{ route('admin.courses.index') }}" class="btn btn-success quick-action-btn">
                         <i class="bi bi-journal-plus me-2"></i>Kelola Mata Pelajaran
                     </a>
-                    <a href="{{ route('admin.announcements.create') }}" class="btn btn-info">
-                        <i class="bi bi-megaphone me-2"></i>Buat Pengumuman
+                    <a href="{{ route('admin.users.index') }}" class="btn btn-info quick-action-btn text-white">
+                        <i class="bi bi-people-fill me-2"></i>Kelola Users
                     </a>
                 </div>
             </div>
 
             <!-- Recent Users -->
             <div class="chart-container">
-                <h5 class="mb-3">
-                    <i class="bi bi-person-plus text-success me-2"></i>
+                <h5 class="section-title">
+                    <i class="bi bi-person-plus-fill text-success"></i>
                     User Terbaru
                 </h5>
+
+                @if(isset($recentUsers) && $recentUsers->count() > 0)
                 @foreach($recentUsers as $user)
-                <div class="d-flex align-items-center mb-3">
-                    <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}"
-                        class="rounded-circle me-3"
-                        style="width: 40px; height: 40px;"
-                        alt="User">
+                <div class="user-item d-flex align-items-center">
+                    <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}&background=random&color=fff&bold=true"
+                        class="user-avatar me-3"
+                        alt="{{ $user->name }}">
                     <div class="flex-grow-1">
-                        <h6 class="mb-0">{{ $user->name }}</h6>
-                        <small class="text-muted">{{ ucfirst($user->role) }}</small>
+                        <h6 class="mb-0" style="color: #1f2937; font-weight: 600;">{{ $user->name }}</h6>
+                        <small class="text-muted">
+                            <i class="bi bi-person-badge me-1"></i>
+                            {{ ucfirst($user->role) }}
+                        </small>
                     </div>
-                    <small class="text-muted">{{ $user->created_at->diffForHumans() }}</small>
+                    <small class="text-muted">
+                        {{ $user->created_at->diffForHumans() }}
+                    </small>
                 </div>
                 @endforeach
+                @else
+                <div class="empty-state">
+                    <i class="bi bi-person-x"></i>
+                    <p class="mb-0">Belum ada user baru</p>
+                </div>
+                @endif
             </div>
         </div>
     </div>

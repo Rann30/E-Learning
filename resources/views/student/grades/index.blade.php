@@ -47,7 +47,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="mb-3">Rata-rata Per Kursus</h5>
+                    <h5 class="mb-3">Rata-rata Per mata pelajaran</h5>
                     @forelse($gradesByCourse as $gradeData)
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
                         <div>
@@ -81,7 +81,7 @@
                         <tr>
                             <th>No</th>
                             <th>Tugas</th>
-                            <th>Kursus</th>
+                            <th>mata pelajaran</th>
                             <th>Tanggal Submit</th>
                             <th>Nilai</th>
                             <th>Status</th>

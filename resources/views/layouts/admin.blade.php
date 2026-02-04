@@ -243,21 +243,19 @@
                             <i class="bi bi-person-circle me-1"></i> {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+
                             <li>
-                                <a class="dropdown-item" href="{{ route('admin.settings') }}">
-                                    <i class="bi bi-gear me-2"></i> Settings
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
+
                             </li>
                             <li>
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="dropdown-item text-danger">
-                                        <i class="bi bi-box-arrow-right me-2"></i> Logout
+                                    <button type="submit" class="dropdown-item">
+                                        Logout
                                     </button>
                                 </form>
+
+
                             </li>
                         </ul>
                     </li>
@@ -293,35 +291,16 @@
                                 Mata Pelajaran
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.assignments.*') ? 'active' : '' }}"
-                                href="{{ route('admin.assignments.index') }}">
-                                <i class="bi bi-file-text me-2"></i>
-                                Tugas
-                            </a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.announcements.*') ? 'active' : '' }}"
-                                href="{{ route('admin.announcements.index') }}">
-                                <i class="bi bi-megaphone me-2"></i>
-                                Pengumuman
-                            </a>
-                        </li>
+
+
+
 
                     </ul>
 
                     <hr class="my-3" style="border-color: var(--primary-light);">
 
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}"
-                                href="{{ route('admin.settings') }}">
-                                <i class="bi bi-gear me-2"></i>
-                                Settings
-                            </a>
-                        </li>
-                    </ul>
+
                 </div>
             </nav>
 

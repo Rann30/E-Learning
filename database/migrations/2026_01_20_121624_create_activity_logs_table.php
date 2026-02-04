@@ -13,11 +13,18 @@ return new class extends Migration
     {
         Schema::create('activity_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('action');
-            $table->text('description')->nullable();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('action'); // create, update, delete, login, etc
+            $table->string('model')->nullable(); // Model name (User, Course, etc)
+            $table->unsignedBigInteger('model_id')->nullable(); // ID of the model
+            $table->text('description'); // Human readable description
+            $table->json('properties')->nullable(); // Additional data
             $table->string('ip_address')->nullable();
+            $table->string('user_agent')->nullable();
             $table->timestamps();
+
+            $table->index(['user_id', 'created_at']);
+            $table->index(['model', 'model_id']);
         });
     }
 
